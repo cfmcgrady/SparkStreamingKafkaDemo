@@ -60,6 +60,8 @@ class NginxLineParser extends Serializable {
 }
 
 object NginxUtils {
+
+
   val parser = new NginxLineParser
   def main(args: Array[String]): Unit = {
     val log = """192.168.0.102 - - [04/May/2015:23:02:01 -0300]  "GET /adserver/www/delivery/lg.php?bannerid=9382&campaignid=679&zoneid=1519&cb=40f1441eb8 HTTP/1.1" 0.000  43 "-" Agent["MOT-EX128 Obigo/WAP2.0 MIDP-2.0/CLDC-1.1"] - . 200"""
@@ -70,6 +72,8 @@ object NginxUtils {
     val a = parser.parse(l)
     println(a.get.URL)
   }
+
+  def parse(record: String): Option[NginxLogRecord] = parser.parse(record)
 
   def produceLog(page: String): String = {
     val s = """192.168.0.102 - - [04/May/2015:23:02:01 -0300]  "GET """

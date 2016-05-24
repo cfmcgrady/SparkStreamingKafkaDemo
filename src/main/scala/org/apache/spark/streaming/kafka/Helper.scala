@@ -41,9 +41,12 @@ object KafkaHelper {
   }
 
   private def produceData: Array[String] = {
-    val page = "/index"
+    val pages = List("/index", "/download", "/upload", "/help", "/software")
     val r = Random.nextInt(5)
-    val msg = (0 to r).map( x => (NginxUtils.produceLog(page))).toArray
+    val msg = (0 to r).map( x => {
+      val page = pages(Random.nextInt(pages.length - 1))
+      (NginxUtils.produceLog(page))
+    }).toArray
     msg
   }
 }
