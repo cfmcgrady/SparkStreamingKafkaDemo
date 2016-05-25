@@ -8,7 +8,10 @@ import streaming.utils.NginxUtils
 
 object PVExample {
   def main(args: Array[String]): Unit = {
-    val sparkConf = new SparkConf().setMaster("local[4]").setAppName("test")
+    val sparkConf = new SparkConf().setAppName("pv example")
+    if (args.length > 0) {
+      sparkConf.setMaster("local[4]")
+    }
     var ssc = new StreamingContext(sparkConf, Seconds(5))
 
 
